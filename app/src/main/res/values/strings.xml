@@ -16,5 +16,6 @@
     <string name="register_success">Register Successful</string>
 
     <string name="welcome_message">Welcome to StatTrak</string>
+    <string name="title_activity_display_stats">DisplayStatsActivity</string>
 
 </resources>
