@@ -21,7 +21,7 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
     //every one of these columns represents the information about the data
     public static final String STATS_TABLE = "stats";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_TITLE = "title";
+//    public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_SINGLES = "singles";
     public static final String COLUMN_DOUBLES = "doubles";
     public static final String COLUMN_TRIPLES = "triples";
@@ -61,19 +61,18 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
 
     */
 
-
+//removed TITLE
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table " + STATS_TABLE +
-                        " ( " + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_TITLE +
-                        " text not null " + COLUMN_SINGLES + " text not null " + COLUMN_DOUBLES +
-                        " text not null " + COLUMN_TRIPLES + " text not null " + COLUMN_HOMERUNS +
-                        " text not null " + COLUMN_ATBATS + " text not null " + COLUMN_WALKS +
-                        " text not null " + COLUMN_HITBYPITCH + " text not null " +
-                        COLUMN_STRIKEOUTS + " text not null " + COLUMN_RUNS + " text not null " +
-                        COLUMN_RUNSBATTEDIN + " text not null " + COLUMN_STOLENBASES +
-                        " text not null " + COLUMN_CAUGHTSTEALING + ")"
+                        " ( " + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_SINGLES + " text not null, " + COLUMN_DOUBLES +
+                        " text not null, " + COLUMN_TRIPLES + " text not null, " + COLUMN_HOMERUNS +
+                        " text not null, " + COLUMN_ATBATS + " text not null, " + COLUMN_WALKS +
+                        " text not null, " + COLUMN_HITBYPITCH + " text not null, " +
+                        COLUMN_STRIKEOUTS + " text not null, " + COLUMN_RUNS + " text not null, " +
+                        COLUMN_RUNSBATTEDIN + " text not null, " + COLUMN_STOLENBASES +
+                        " text not null, " + COLUMN_CAUGHTSTEALING + ")"
         );
     }
 
@@ -83,13 +82,14 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertStat(String title, String singles, String doubles, String triples,
+    //removed String title
+    public boolean insertStat(String singles, String doubles, String triples,
                               String homeruns, String atbats, String walks, String hitbypitch,
                               String strikeouts, String runs, String runsbattedin,
                               String stolenbases, String caughtstealing) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("title", title);
+//        contentValues.put("title", title);
         contentValues.put("singles", singles);
         contentValues.put("doubles", doubles);
         contentValues.put("triples", triples);
@@ -118,13 +118,14 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public boolean updateStats(Integer id, String title, String singles, String doubles,
+    //removed title
+    public boolean updateStats(Integer id, String singles, String doubles,
                                String triples, String homeruns, String atbats, String walks,
                                String hitbypitch, String strikeouts, String runs,
                                String runsbattedin, String stolenbases, String caughtstealing) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("title", title);
+//        contentValues.put("title", title);
         contentValues.put("singles", singles);
         contentValues.put("doubles", doubles);
         contentValues.put("triples", triples);
@@ -153,7 +154,7 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         res.moveToFirst();
 
         while (res.isAfterLast() == false) {
-            array_list.add(res.getString(res.getColumnIndex(COLUMN_TITLE)));
+            array_list.add(res.getString(res.getColumnIndex(COLUMN_SINGLES)));
             res.moveToNext();
         }
         return array_list;

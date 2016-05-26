@@ -21,6 +21,10 @@
                 android:id="@+id/clear_data"
                 android:title="Clear User Login data" />
 
+            <item android:id="@+id/item1"
+                android:title="Add new Stat" >
+            </item>
+
         </menu>
 
     </item>

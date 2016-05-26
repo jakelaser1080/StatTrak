@@ -17,5 +17,8 @@
 
     <string name="welcome_message">Welcome to StatTrak</string>
     <string name="title_activity_display_stats">DisplayStatsActivity</string>
+    <string name="deleteContact">Are you sure you want to delete it?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>
