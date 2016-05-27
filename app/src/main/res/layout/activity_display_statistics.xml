@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.jrg.stattrak.BattingActivity">
+    tools:context="com.example.jrg.stattrak.DisplayStatsActivity">
 
     <TextView
         android:id="@+id/hittingStats"
@@ -18,6 +18,13 @@
         android:layout_alignParentTop="true"
         android:text="@string/hitting_statistics"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTitle"
+        android:layout_below="@+id/hittingStats"
+        android:hint="Enter Title of Game" />
 
     <Button
         android:id="@+id/button"
@@ -73,7 +80,7 @@
         android:layout_height="match_parent"
         android:layout_alignEnd="@+id/button"
         android:layout_alignRight="@+id/button"
-        android:layout_below="@+id/hittingStats">
+        android:layout_below="@+id/editTitle">
 
         <TableRow
             android:layout_width="match_parent"

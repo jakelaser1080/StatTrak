@@ -21,7 +21,7 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
     //every one of these columns represents the information about the data
     public static final String STATS_TABLE = "stats";
     public static final String COLUMN_ID = "id";
-    //    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_SINGLES = "singles";
     public static final String COLUMN_DOUBLES = "doubles";
     public static final String COLUMN_TRIPLES = "triples";
@@ -65,7 +65,7 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
-                "create table stats " + "(id integer primary key autoincrement, singles text," +
+                "create table stats " + "(id integer primary key autoincrement, title text, singles text," +
                         " doubles text, triples text, homeruns text, atbats text, walks text," +
                         " hitbypitch text, strikeouts text, runs text, runsbattedin text," +
                         " stolenbases text, caughtstealing text)"
@@ -87,13 +87,13 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
     }
 
     //removed String title
-    public boolean insertStat(String singles, String doubles, String triples,
+    public boolean insertStat(String title, String singles, String doubles, String triples,
                               String homeruns, String atbats, String walks, String hitbypitch,
                               String strikeouts, String runs, String runsbattedin,
                               String stolenbases, String caughtstealing) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-//        contentValues.put("title", title);
+        contentValues.put("title", title);
         contentValues.put("singles", singles);
         contentValues.put("doubles", doubles);
         contentValues.put("triples", triples);
@@ -124,13 +124,13 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
     }
 
     //removed title
-    public boolean updateStats(Integer id, String singles, String doubles,
+    public boolean updateStats(Integer id, String title, String singles, String doubles,
                                String triples, String homeruns, String atbats, String walks,
                                String hitbypitch, String strikeouts, String runs,
                                String runsbattedin, String stolenbases, String caughtstealing) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-//        contentValues.put("title", title);
+        contentValues.put("title", title);
         contentValues.put("singles", singles);
         contentValues.put("doubles", doubles);
         contentValues.put("triples", triples);
@@ -160,7 +160,7 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         res.moveToFirst();
 
         while (res.isAfterLast() == false) {
-            array_list.add(res.getString(res.getColumnIndex(COLUMN_SINGLES)));
+            array_list.add(res.getString(res.getColumnIndex(COLUMN_TITLE)));
             res.moveToNext();
         }
         return array_list;

@@ -20,7 +20,7 @@ public class DisplayStatsActivity extends AppCompatActivity {
 
     private StatisticsDbAdapter mydb;
 
-    EditText singles, doubles, triples, homeruns, atbats, walks, hitbypitch, strikeouts, runs, runsbattedin, stolenbases, caughtstealing;
+    EditText title, singles, doubles, triples, homeruns, atbats, walks, hitbypitch, strikeouts, runs, runsbattedin, stolenbases, caughtstealing;
     int id_To_Update = 0;
 
 
@@ -29,6 +29,7 @@ public class DisplayStatsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_statistics);
 
+        title = (EditText) findViewById(R.id.editTitle);
         singles = (EditText) findViewById(R.id.editsingles);
         doubles = (EditText) findViewById(R.id.editdoubles);
         triples = (EditText) findViewById(R.id.edittriples);
@@ -50,10 +51,13 @@ public class DisplayStatsActivity extends AppCompatActivity {
 
             if (Value > 0) {
                 //means this is the view part not the add contact part
+
                 Cursor rs = mydb.getData(Value);
                 id_To_Update = Value;
                 rs.moveToFirst();
 
+
+                String ctitle = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_TITLE));
                 String csingles = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_SINGLES));
                 String cdoubles = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_DOUBLES));
                 String ctriples = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_TRIPLES));
@@ -73,6 +77,10 @@ public class DisplayStatsActivity extends AppCompatActivity {
 
                 Button b = (Button) findViewById(R.id.button5);
                 b.setVisibility(View.INVISIBLE);
+
+                title.setText((CharSequence) ctitle);
+                title.setFocusable(false);
+                title.setClickable(false);
 
                 singles.setText((CharSequence) csingles);
                 singles.setFocusable(false);
@@ -150,6 +158,10 @@ public class DisplayStatsActivity extends AppCompatActivity {
             case R.id.Edit_Contact:
                 Button b = (Button) findViewById(R.id.button5);
                 b.setVisibility(View.VISIBLE);
+                title.setEnabled(true);
+                title.setFocusableInTouchMode(true);
+                title.setClickable(true);
+
                 singles.setEnabled(true);
                 singles.setFocusableInTouchMode(true);
                 singles.setClickable(true);
@@ -234,7 +246,7 @@ public class DisplayStatsActivity extends AppCompatActivity {
         {
             int Value = extras.getInt("id");
             if(Value>0){
-                if(mydb.updateStats(id_To_Update,singles.getText().toString(),
+                if(mydb.updateStats(id_To_Update,title.getText().toString(), singles.getText().toString(),
                         doubles.getText().toString(), triples.getText().toString(),
                         homeruns.getText().toString(), atbats.getText().toString(),
                         walks.getText().toString(), hitbypitch.getText().toString(),
@@ -250,7 +262,7 @@ public class DisplayStatsActivity extends AppCompatActivity {
                 }
             }
             else{
-                if(mydb.insertStat(singles.getText().toString(),
+                if(mydb.insertStat(title.getText().toString(), singles.getText().toString(),
                         doubles.getText().toString(), triples.getText().toString(),
                         homeruns.getText().toString(), atbats.getText().toString(),
                         walks.getText().toString(), hitbypitch.getText().toString(),
