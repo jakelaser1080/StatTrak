@@ -20,8 +20,8 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
 
     //every one of these columns represents the information about the data
     public static final String STATS_TABLE = "stats";
-    public static final String COLUMN_ID = "_id";
-//    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_ID = "id";
+    //    public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_SINGLES = "singles";
     public static final String COLUMN_DOUBLES = "doubles";
     public static final String COLUMN_TRIPLES = "triples";
@@ -61,18 +61,22 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
 
     */
 
-//removed TITLE
+    //removed TITLE
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
-                "create table " + STATS_TABLE +
-                        " ( " + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_SINGLES + " text not null, " + COLUMN_DOUBLES +
-                        " text not null, " + COLUMN_TRIPLES + " text not null, " + COLUMN_HOMERUNS +
-                        " text not null, " + COLUMN_ATBATS + " text not null, " + COLUMN_WALKS +
-                        " text not null, " + COLUMN_HITBYPITCH + " text not null, " +
-                        COLUMN_STRIKEOUTS + " text not null, " + COLUMN_RUNS + " text not null, " +
-                        COLUMN_RUNSBATTEDIN + " text not null, " + COLUMN_STOLENBASES +
-                        " text not null, " + COLUMN_CAUGHTSTEALING + ")"
+                "create table stats " + "(id integer primary key autoincrement, singles text," +
+                        " doubles text, triples text, homeruns text, atbats text, walks text," +
+                        " hitbypitch text, strikeouts text, runs text, runsbattedin text," +
+                        " stolenbases text, caughtstealing text)"
+//                "create table " + STATS_TABLE +
+//                        " ( " + COLUMN_ID + " integer primary key autoincrement, " + COLUMN_SINGLES + " text not null, " + COLUMN_DOUBLES +
+//                        " text not null, " + COLUMN_TRIPLES + " text not null, " + COLUMN_HOMERUNS +
+//                        " text not null, " + COLUMN_ATBATS + " text not null, " + COLUMN_WALKS +
+//                        " text not null, " + COLUMN_HITBYPITCH + " text not null, " +
+//                        COLUMN_STRIKEOUTS + " text not null, " + COLUMN_RUNS + " text not null, " +
+//                        COLUMN_RUNSBATTEDIN + " text not null, " + COLUMN_STOLENBASES +
+//                        " text not null, " + COLUMN_CAUGHTSTEALING + ")"
         );
     }
 
@@ -108,7 +112,8 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
 
     public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from contacts where id=" + id + "", null);
+        Cursor res = db.rawQuery("SELECT * FROM stats where id = " + id, null);
+//        Cursor res = db.query(STATS_TABLE, COLUMN_ID, null, null, null, null, null);
         return res;
     }
 
@@ -141,6 +146,7 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         db.update(STATS_TABLE, contentValues, "id = ? ", new String[]{Integer.toString(id)});
         return true;
     }
+
 
     public Integer deleteStat(Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();

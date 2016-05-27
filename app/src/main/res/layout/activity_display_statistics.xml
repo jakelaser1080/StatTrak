@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button6"
         android:layout_alignParentBottom="false"
+        android:onClick="run"
         android:text="Save" />
 
     <Button
