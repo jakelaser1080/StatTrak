@@ -22,7 +22,7 @@
         <activity android:name=".HomeActivity" />
         <activity
             android:name=".DisplayStatsActivity"/>
-            <!--android:label="@string/title_activity_display_stats"/>-->
+        <!--android:label="@string/title_activity_display_stats"/>-->
     </application>
 
 </manifest>

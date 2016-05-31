@@ -160,7 +160,7 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         db.delete(STATS_TABLE, null, null);
     }
 
-        public ArrayList<String> getAllStats() {
+    public ArrayList<String> getAllStats() {
         ArrayList<String> array_list = new ArrayList<String>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + STATS_TABLE, null);
@@ -185,5 +185,4 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
 //        return array_list;
 //    }
 }
-
 

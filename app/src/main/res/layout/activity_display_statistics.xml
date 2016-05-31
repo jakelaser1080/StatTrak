@@ -45,13 +45,13 @@
         android:text="Pitching Stats" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button6"
         android:layout_alignParentBottom="false"
-        android:onClick="run"
-        android:text="Save" />
+        android:text="Save"
+        android:onClick="run"/>
 
     <Button
         android:id="@+id/button6"

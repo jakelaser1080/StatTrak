@@ -77,7 +77,7 @@ public class DisplayStatsActivity extends AppCompatActivity {
                         rs.close();
                     }
 
-                    Button b = (Button) findViewById(R.id.button5);
+                    Button b = (Button) findViewById(R.id.button1);
                     b.setVisibility(View.INVISIBLE);
 
                     title.setText((CharSequence) ctitle);
@@ -159,7 +159,7 @@ public class DisplayStatsActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
             case R.id.Edit_Contact:
-                Button b = (Button) findViewById(R.id.button5);
+                Button b = (Button) findViewById(R.id.button1);
                 b.setVisibility(View.VISIBLE);
                 title.setEnabled(true);
                 title.setFocusableInTouchMode(true);
