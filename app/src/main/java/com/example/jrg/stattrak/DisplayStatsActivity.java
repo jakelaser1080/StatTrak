@@ -54,81 +54,84 @@ public class DisplayStatsActivity extends AppCompatActivity {
 
                 Cursor rs = mydb.getData(Value);
                 id_To_Update = Value;
-                rs.moveToFirst();
+//                rs.moveToFirst();
+
+                if (rs != null && rs.moveToFirst()) {
+
+                    String ctitle = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_TITLE));
+                    String csingles = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_SINGLES));
+                    String cdoubles = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_DOUBLES));
+                    String ctriples = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_TRIPLES));
+                    String chomeruns = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_HOMERUNS));
+                    String catbats = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_ATBATS));
+                    String cwalks = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_WALKS));
+                    String chitbypitch = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_HITBYPITCH));
+                    String cstrikeouts = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_STRIKEOUTS));
+                    String cruns = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_RUNS));
+                    String crbis = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_RUNSBATTEDIN));
+                    String cstolenbases = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_STOLENBASES));
+                    String ccaughtstealing = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_CAUGHTSTEALING));
 
 
-                String ctitle = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_TITLE));
-                String csingles = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_SINGLES));
-                String cdoubles = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_DOUBLES));
-                String ctriples = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_TRIPLES));
-                String chomeruns = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_HOMERUNS));
-                String catbats = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_ATBATS));
-                String cwalks = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_WALKS));
-                String chitbypitch = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_HITBYPITCH));
-                String cstrikeouts = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_STRIKEOUTS));
-                String cruns = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_RUNS));
-                String crbis = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_RUNSBATTEDIN));
-                String cstolenbases = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_STOLENBASES));
-                String ccaughtstealing = rs.getString(rs.getColumnIndex(StatisticsDbAdapter.COLUMN_CAUGHTSTEALING));
+                    if (!rs.isClosed()) {
+                        rs.close();
+                    }
 
-                if (!rs.isClosed()) {
-                    rs.close();
+                    Button b = (Button) findViewById(R.id.button5);
+                    b.setVisibility(View.INVISIBLE);
+
+                    title.setText((CharSequence) ctitle);
+                    title.setFocusable(false);
+                    title.setClickable(false);
+
+                    singles.setText((CharSequence) csingles);
+                    singles.setFocusable(false);
+                    singles.setClickable(false);
+
+                    doubles.setText((CharSequence) cdoubles);
+                    doubles.setFocusable(false);
+                    doubles.setClickable(false);
+
+                    triples.setText((CharSequence) ctriples);
+                    triples.setFocusable(false);
+                    triples.setClickable(false);
+
+                    homeruns.setText((CharSequence) chomeruns);
+                    homeruns.setFocusable(false);
+                    homeruns.setClickable(false);
+
+                    atbats.setText((CharSequence) catbats);
+                    atbats.setFocusable(false);
+                    atbats.setClickable(false);
+
+                    walks.setText((CharSequence) cwalks);
+                    walks.setFocusable(false);
+                    walks.setClickable(false);
+
+                    hitbypitch.setText((CharSequence) chitbypitch);
+                    hitbypitch.setFocusable(false);
+                    hitbypitch.setClickable(false);
+
+                    strikeouts.setText((CharSequence) cstrikeouts);
+                    strikeouts.setFocusable(false);
+                    strikeouts.setClickable(false);
+
+                    runs.setText((CharSequence) cruns);
+                    runs.setFocusable(false);
+                    runs.setClickable(false);
+
+                    runsbattedin.setText((CharSequence) crbis);
+                    runsbattedin.setFocusable(false);
+                    runsbattedin.setClickable(false);
+
+                    stolenbases.setText((CharSequence) cstolenbases);
+                    stolenbases.setFocusable(false);
+                    stolenbases.setClickable(false);
+
+                    caughtstealing.setText((CharSequence) ccaughtstealing);
+                    caughtstealing.setFocusable(false);
+                    caughtstealing.setClickable(false);
                 }
-
-                Button b = (Button) findViewById(R.id.button5);
-                b.setVisibility(View.INVISIBLE);
-
-                title.setText((CharSequence) ctitle);
-                title.setFocusable(false);
-                title.setClickable(false);
-
-                singles.setText((CharSequence) csingles);
-                singles.setFocusable(false);
-                singles.setClickable(false);
-
-                doubles.setText((CharSequence) cdoubles);
-                doubles.setFocusable(false);
-                doubles.setClickable(false);
-
-                triples.setText((CharSequence) ctriples);
-                triples.setFocusable(false);
-                triples.setClickable(false);
-
-                homeruns.setText((CharSequence) chomeruns);
-                homeruns.setFocusable(false);
-                homeruns.setClickable(false);
-
-                atbats.setText((CharSequence) catbats);
-                atbats.setFocusable(false);
-                atbats.setClickable(false);
-
-                walks.setText((CharSequence) cwalks);
-                walks.setFocusable(false);
-                walks.setClickable(false);
-
-                hitbypitch.setText((CharSequence) chitbypitch);
-                hitbypitch.setFocusable(false);
-                hitbypitch.setClickable(false);
-
-                strikeouts.setText((CharSequence) cstrikeouts);
-                strikeouts.setFocusable(false);
-                strikeouts.setClickable(false);
-
-                runs.setText((CharSequence) cruns);
-                runs.setFocusable(false);
-                runs.setClickable(false);
-
-                runsbattedin.setText((CharSequence) crbis);
-                runsbattedin.setFocusable(false);
-                runsbattedin.setClickable(false);
-
-                stolenbases.setText((CharSequence) cstolenbases);
-                stolenbases.setFocusable(false);
-                stolenbases.setClickable(false);
-
-                caughtstealing.setText((CharSequence) ccaughtstealing);
-                caughtstealing.setFocusable(false);
-                caughtstealing.setClickable(false);
             }
         }
 

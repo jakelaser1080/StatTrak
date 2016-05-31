@@ -113,8 +113,11 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
     public Cursor getData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM stats where id = " + id, null);
+        res.moveToFirst();
+
 //        Cursor res = db.query(STATS_TABLE, COLUMN_ID, null, null, null, null, null);
         return res;
+
     }
 
     public int numberOfRows() {
@@ -123,7 +126,6 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         return numRows;
     }
 
-    //removed title
     public boolean updateStats(Integer id, String title, String singles, String doubles,
                                String triples, String homeruns, String atbats, String walks,
                                String hitbypitch, String strikeouts, String runs,
@@ -153,7 +155,12 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         return db.delete(STATS_TABLE, "id = ? ", new String[]{Integer.toString(id)});
     }
 
-    public ArrayList<String> getAllStats() {
+    public void removeAll() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(STATS_TABLE, null, null);
+    }
+
+        public ArrayList<String> getAllStats() {
         ArrayList<String> array_list = new ArrayList<String>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("select * from " + STATS_TABLE, null);
@@ -165,6 +172,18 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         }
         return array_list;
     }
+//    public ArrayList<String> getAllStats() {
+//        ArrayList<String> array_list = new ArrayList<String>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor res = db.rawQuery("select * from " + STATS_TABLE, null);
+//        if (res.moveToFirst()) {
+//            do {
+//                array_list.add(res.getString(res.getColumnIndex(COLUMN_TITLE)));
+//            } while (res.moveToNext());
+//        }
+//
+//        return array_list;
+//    }
 }
 
 

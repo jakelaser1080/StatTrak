@@ -68,6 +68,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 startActivity(intent);
                 return true;
+            case R.id.clear_data:
+                mydb.removeAll();
             default:
                 return super.onOptionsItemSelected(item);
         }
