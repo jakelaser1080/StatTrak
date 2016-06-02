@@ -160,29 +160,32 @@ public class StatisticsDbAdapter extends SQLiteOpenHelper {
         db.delete(STATS_TABLE, null, null);
     }
 
-    public ArrayList<String> getAllStats() {
-        ArrayList<String> array_list = new ArrayList<String>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery("select * from " + STATS_TABLE, null);
-        res.moveToFirst();
-
-        while (res.isAfterLast() == false) {
-            array_list.add(res.getString(res.getColumnIndex(COLUMN_TITLE)));
-            res.moveToNext();
-        }
-        return array_list;
-    }
 //    public ArrayList<String> getAllStats() {
 //        ArrayList<String> array_list = new ArrayList<String>();
 //        SQLiteDatabase db = this.getReadableDatabase();
 //        Cursor res = db.rawQuery("select * from " + STATS_TABLE, null);
-//        if (res.moveToFirst()) {
-//            do {
-//                array_list.add(res.getString(res.getColumnIndex(COLUMN_TITLE)));
-//            } while (res.moveToNext());
-//        }
+//        res.moveToFirst();
 //
+//        while (res.isAfterLast() == false) {
+//            array_list.add(res.getString(res.getColumnIndex(COLUMN_TITLE)));
+//            array_list.add(res.getString(res.getColumnIndex(COLUMN_ID)));
+//
+//            res.moveToNext();
+//        }
+//        db.close();
 //        return array_list;
 //    }
+    public ArrayList<String> getAllStats() {
+        ArrayList<String> array_list = new ArrayList<String>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + STATS_TABLE, null);
+        if (res.moveToFirst()) {
+            do {
+                array_list.add(res.getString(res.getColumnIndex(COLUMN_TITLE)));
+            } while (res.moveToNext());
+        }
+
+        return array_list;
+    }
 }
 

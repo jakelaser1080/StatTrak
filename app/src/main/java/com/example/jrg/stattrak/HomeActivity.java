@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -31,20 +32,43 @@ public class HomeActivity extends AppCompatActivity {
 
         obj = (ListView) findViewById(R.id.listView1);
         obj.setAdapter(arrayAdapter);
+
+        /*
+        Made a lot of changes in here 6-2-16. Fix it to work
+         */
         obj.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                int id_To_Search = arg2 + 1;
-
-                Bundle dataBundle = new Bundle();
-                dataBundle.putInt("id", id_To_Search);
-
-                Intent intent = new Intent(getApplicationContext(), DisplayStatsActivity.class);
-
-                intent.putExtras(dataBundle);
-                startActivity(intent);
+//                int id_To_Search = arg2 + 1;
+////                int id_To_Search = arg0.getCount() - arg2;
+//
+//                Bundle dataBundle = new Bundle();
+//                dataBundle.putInt("id", id_To_Search);
+//
+//                Intent intent = new Intent(getApplicationContext(), DisplayStatsActivity.class);
+//
+//                intent.putExtras(dataBundle);
+//                startActivity(intent);
+                TextView pos = (TextView) findViewById(R.id.editTitle);
+                displayText(Integer.parseInt(pos.getText().toString()));
             }
         });
+    }
+
+    /*
+    Added "displayText" method, fix this, it's not working
+     */
+
+    public void displayText(int pos)
+    {
+        pos++;
+        String s = "";
+        s += pos;
+
+        Intent intent = new Intent(getApplicationContext(), DisplayStatsActivity.class);
+        intent.putExtra("id", s);
+        startActivity(intent);
+
     }
 
     @Override
