@@ -1,6 +1,7 @@
 package com.example.jrg.stattrak;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -14,12 +15,15 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HomeActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "MESSAGE";
     private ListView obj;
     StatisticsDbAdapter mydb;
+    public HashMap<String, Integer> hashMap = new HashMap<>(); //this is the new Hashmap
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +36,23 @@ public class HomeActivity extends AppCompatActivity {
 
         obj = (ListView) findViewById(R.id.listView1);
         obj.setAdapter(arrayAdapter);
-
         /*
-        Made a lot of changes in here 6-2-16. Fix it to work
-         */
-        obj.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+         New code starts here
+        */
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            int Value = extras.getInt("id");
+
+            if (Value > 0) {
+                //means this is the view part not the add contact part
+                Cursor cursor = mydb.getData(Value);
+                hashMap.put(cursor.getString(1), cursor.getInt(0));
+
+
+                obj.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 //                int id_To_Search = arg2 + 1;
-////                int id_To_Search = arg0.getCount() - arg2;
 //
 //                Bundle dataBundle = new Bundle();
 //                dataBundle.putInt("id", id_To_Search);
@@ -49,27 +61,37 @@ public class HomeActivity extends AppCompatActivity {
 //
 //                intent.putExtras(dataBundle);
 //                startActivity(intent);
-                TextView pos = (TextView) findViewById(R.id.editTitle);
-                displayText(Integer.parseInt(pos.getText().toString()));
+                        TextView pos = (TextView) findViewById(R.id.editTitle);
+                        Bundle dataBundle = new Bundle();
+                        dataBundle.putInt("id", hashMap.get(pos.getText().toString()));
+
+                        Intent intent = new Intent(getApplicationContext(), DisplayStatsActivity.class);
+
+                        intent.putExtras(dataBundle);
+                        startActivity(intent);
+                        //                displayText(Integer.parseInt(pos.getText().toString()));
+                    }
+                });
             }
-        });
+        }
     }
+
 
     /*
     Added "displayText" method, fix this, it's not working
      */
 
-    public void displayText(int pos)
-    {
-        pos++;
-        String s = "";
-        s += pos;
-
-        Intent intent = new Intent(getApplicationContext(), DisplayStatsActivity.class);
-        intent.putExtra("id", s);
-        startActivity(intent);
-
-    }
+//    public void displayText(int pos)
+//    {
+//        pos++;
+//        String s = "";
+//        s += pos;
+//
+//        Intent intent = new Intent(getApplicationContext(), DisplayStatsActivity.class);
+//        intent.putExtra("id", s);
+//        startActivity(intent);
+//
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
